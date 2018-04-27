@@ -29,4 +29,8 @@ export default {
 h1 {
   font-weight: normal;
 }
+
+.brd {
+  border: 2px solid #ddd;
+}
 </style>
