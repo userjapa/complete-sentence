@@ -90,13 +90,9 @@ export default {
       for (const ind in exercises) {
         if (!exercises[ind].answered) {
           this.exercise = exercises[ind]
-          console.log('found!');
           break
         } else {
-          console.log('not found');
-          console.log(parseInt(ind) === (exercises.length - 1))
           if (parseInt(ind) === (exercises.length - 1)) {
-            console.log('is final');
             this.exercise = exercises[ind]
             this.ended = true
           }
