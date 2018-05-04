@@ -1,66 +1,70 @@
 <template>
-  <div>
-    <div>
+  <div class="container column">
+    <div class="item">
       <h2 id="copy">Create</h2>
     </div>
-    <div class="container brd">
-      <ListenSentence :exercises="exercises"/>
-    </div>
-    <div class="container">
-      <div class="view brd">
-        <div>
-          <form v-on:submit.prevent="save(exercise)">
-            <div>
-              <label for="exercise_title">Title</label>
-              <input id="exercise_title" type="text" v-model="exercise.title" required/>
-            </div>
-            <div>
-              <label for="exercise_audio">Audio Source</label>
-              <input id="exercise_audio" type="text" v-model="exercise.audio" required @click="exercise.audio = `https://vignette.wikia.nocookie.net/leagueoflegends/images/b/b1/Miss_Fortune_008.ogg/revision/latest?cb=20180320083650`"/>
-            </div>
-            <div>
-              <label for="exercise_image">Image</label>
-              <input id="exercise_image" type="text" v-model="exercise.img" required @click="exercise.img = `https://www.mariannechua.com/uploads/12650-british-tea-party-wedding-45.jpg`"/>
-            </div>
-            <div>
-              <button type="submit" name="save_exercise" v-if="$store.getters['isToUpdate']" :disabled="!$store.getters['isToUpdate']">Save</button>
-              <button @click.prevent="edit(exercise)" v-if="!$store.getters['isToUpdate']">Edit</button>
-              <button @click.prevent="cancelUpdate()" v-if="!$store.getters['isToUpdate']">Cancel</button>
-            </div>
-          </form>
-          <form v-on:submit.prevent="addQuestion(question)">
-            <div>
-              <h4>Answers</h4>
-            </div>
-            <div>
-              <label for="question_title">Title</label>
-              <input id="question_title" type="text" v-model="question.title" required/>
-              <button type="submit">Add Question</button>
-            </div>
-            <div v-for="(qstn, index) in exercise.answers">
-              <input type="text" v-model="qstn.title"/>
-              <input type="radio" name="correct" @change="correctChanged(qstn)" :checked="qstn.correct">
-              <label>Correct</label>
-              <button @click="removeQuestion(index)">Remove</button>
-            </div>
-          </form>
+    <div class="item item-border">
+      <div class="container column">
+        <div class="item flex-basis-300 item-border">
+          <Answers :exercises="[exercise]"/>
         </div>
-      </div>
-      <div class="view brd">
-        <div>
-          Exercises
-        </div>
-        <div v-for="(ex, index) in exercises">
-          {{ index + 1}}) Title: {{ ex.title }}
-          <button @click.prevent="setToUpdate(ex, index)">Edit</button>
-          <button @click.prevent="remove(index)" :disabled="!$store.getters['isToUpdate']">Remove</button>
+        <div class="item flex-grow-1 item-border">
+          <div class="container row-reverse">
+            <div class="item flex-basis-400">
+              <div>
+                <label for="exercise_title">Title</label>
+                <input id="exercise_title" type="text" v-model="exercise.title" required/>
+              </div>
+              <div>
+                <label for="exercise_audio">Audio Source</label>
+                <input id="exercise_audio" type="text" v-model="exercise.audio" required @click="exercise.audio = `https://vignette.wikia.nocookie.net/leagueoflegends/images/b/b1/Miss_Fortune_008.ogg/revision/latest?cb=20180320083650`"/>
+              </div>
+              <div>
+                <label for="exercise_image">Image</label>
+                <input id="exercise_image" type="text" v-model="exercise.img" required @click="exercise.img = `https://www.mariannechua.com/uploads/12650-british-tea-party-wedding-45.jpg`"/>
+              </div>
+              <form v-on:submit.prevent="addQuestion(question)">
+                <div>
+                  <h4>Answers</h4>
+                </div>
+                <div>
+                  <label for="question_title">Title</label>
+                  <input id="question_title" type="text" v-model="question.title" required/>
+                  <button type="submit">Add Question</button>
+                </div>
+                <div v-for="(qstn, index) in exercise.answers">
+                  <input type="text" v-model="qstn.title"/>
+                  <input type="radio" name="correct" @change="correctChanged(qstn)" :checked="qstn.correct">
+                  <label>Correct</label>
+                  <button @click="removeQuestion(index)">Remove</button>
+                </div>
+              </form>
+              <div>
+                <button @click="save(exercise)" v-if="$store.getters['isToUpdate']">Save</button>
+                <button @click="edit(exercise)" v-if="!$store.getters['isToUpdate']">Edit</button>
+                <button @click="cancelUpdate()" v-if="!$store.getters['isToUpdate']">Cancel</button>
+              </div>
+            </div>
+            <div class="item flex-basis-400">
+              <div class="container column">
+                <div class="item">
+                  Exercises
+                </div>
+                <div v-for="(ex, index) in exercises" class="item">
+                  {{ index + 1 }}) Title: {{ ex.title }}
+                  <button @click.prevent="setToUpdate(ex, index)">Edit</button>
+                  <button @click.prevent="remove(index)" :disabled="!$store.getters['isToUpdate']">Remove</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import ListenSentence from '../../components/ListenSentence'
+import Answers from '../../components/Answers'
 
 export default {
   name: "Create",
@@ -164,18 +168,9 @@ export default {
     }
   },
   components: {
-    ListenSentence
+    Answers
   }
 }
 </script>
 <style lang="scss" scoped>
-.container {
-  display: flex;
-  flex-direction: row;
-}
-
-.view {
-  flex-grow: 1;
-  flex-basis: 600px;
-}
 </style>

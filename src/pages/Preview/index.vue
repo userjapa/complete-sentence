@@ -4,12 +4,12 @@
       <h2>Preview</h2>
     </div>
     <div>
-      <ListenSentence :exercises="exercises"/>
+      <Answers :exercises="exercises"/>
     </div>
   </div>
 </template>
 <script>
-import ListenSentence from '../../components/ListenSentence'
+import Answers from '../../components/Answers'
 
 export default {
   name: "Preview",
@@ -19,7 +19,7 @@ export default {
     }
   },
   components: {
-    ListenSentence
+    Answers
   }
 }
 </script>

@@ -1,12 +1,19 @@
 <template>
   <div>
-    <div>
-      <ul>
-        <li><router-link :to="{ name: 'Create' }">Create</router-link></li>
-        <li><router-link :to="{ name: 'Preview' }">Preview</router-link></li>
-      </ul>
+    <div class="menu">
+      <div class="menu--content size margin container wrap align-items-center justify-content-between">
+        <div>
+          <h1> Complete the Sentence </h1>
+        </div>
+
+        <div class="container wrap align-center">
+          <router-link :to="{ name: 'Create' }">Create</router-link>
+          <router-link :to="{ name: 'Preview' }">Preview</router-link>
+        </div>
+      </div>
     </div>
-    <div>
+
+    <div class="size margin content">
       <router-view/>
     </div>
   </div>
@@ -17,17 +24,19 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
 a {
-  color: #42b983;
+  color: #2c3e50;
+  margin: 10px;
+  text-decoration: none;
+  &:hover {
+    color: #42b983;
+  }
+}
+.menu {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 50px;
+}
+.menu--content {
+  min-height: 70px;
 }
 </style>
