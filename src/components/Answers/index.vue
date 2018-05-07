@@ -12,7 +12,7 @@
           <div class="container column">
             <div class="item flex-basis-200">
               <div
-              class="item text-left"
+              class="item text-left answer"
               v-for="(question, index) in exercise.answers"
               @click="select(question)"
               :class="{
@@ -103,5 +103,10 @@ export default {
 
 .selected {
   color: #000;
+}
+
+.answer {
+  border-radius: 20px;
+  padding-left: 20px;
 }
 </style>
